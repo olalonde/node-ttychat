@@ -64,8 +64,10 @@ var server = net.createServer(function (socket) {
 
 // Create socket file
 exec('nc -U ' + socket_path, function () {
-  // Start server
-  server.listen(socket_path, function() {
-    util.log('Server started. Waiting for connections on ' + socket_path);
+  exec('chmod 777 ' + socket_path, function () {
+    // Start server
+    server.listen(socket_path, function() {
+      util.log('Server started. Waiting for connections on ' + socket_path);
+    });
   });
 });
