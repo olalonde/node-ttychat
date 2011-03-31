@@ -2,6 +2,7 @@
 
 var util = require('util'),
     net = require('net'),
+    fs = require('fs'),
     exec = require('child_process').exec; 
 
 Array.prototype.remove = function(e) {
@@ -62,12 +63,9 @@ var server = net.createServer(function (socket) {
   });
 });
 
-// Create socket file
-exec('nc -U ' + socket_path, function () {
-  exec('chmod 777 ' + socket_path, function () {
-    // Start server
-    server.listen(socket_path, function() {
-      util.log('Server started. Waiting for connections on ' + socket_path);
-    });
-  });
+// Start server
+server.listen(socket_path, function() {
+  util.log('Server started. Waiting for connections on ' + socket_path);
+  fs.chmod(socket_path, "0777");
 });
+

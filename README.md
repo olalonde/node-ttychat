@@ -1,6 +1,6 @@
 # Requirements #
 
-1. [Node.js](http://nodejs.org/)
+1. [Node.js](http://nodejs.org/) (tested on v0.5.0-pre)
 
 # Usage #
 
