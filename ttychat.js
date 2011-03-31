@@ -14,6 +14,12 @@ socket.on('data', function(data) {
   process.stdin.write(data);
 });
 
+socket.on('connect', function(data) {
+  process.stdin.resume();
+  process.stdin.setEncoding('utf8');
+  process.stdin.pipe(socket);
+});
+
 socket.on('error', function(data) {
   process.stdin.write("Server is offline.");
 });
@@ -23,9 +29,4 @@ socket.on('end', function(data) {
   process.exit();
 });
 
-socket.connect(socket_path, function() {
-  process.stdin.resume();
-  process.stdin.setEncoding('utf8');
-  
-  process.stdin.pipe(socket);
-});
+socket.connect(socket_path, function() {});
