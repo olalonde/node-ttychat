@@ -1,9 +1,13 @@
+# Requirements #
+
+1. [http://nodejs.org/](http://nodejs.org/)
+
 # Usage #
 
-Start server:
+Launch the server:
     
     ./ttychat-server
     
-Start clients:
+Start as many clients as you wish:
 
     ./ttychat

@@ -63,7 +63,7 @@ var server = net.createServer(function (socket) {
 });
 
 // Create socket file
-child = exec('nc -U ' + socket_path, function () {
+exec('nc -U ' + socket_path, function () {
   // Start server
   server.listen(socket_path, function() {
     util.log('Server started. Waiting for connections on ' + socket_path);
