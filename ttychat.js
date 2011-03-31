@@ -11,7 +11,7 @@ var socket_path = "/tmp/ttychat.sock";
 var socket = new net.Socket({type: 'unix'});
 
 socket.on('data', function(data) {
-  process.stdin.write(data);
+  process.stdout.write(data);
 });
 
 socket.on('connect', function(data) {
@@ -21,11 +21,11 @@ socket.on('connect', function(data) {
 });
 
 socket.on('error', function(data) {
-  process.stdin.write("Server is offline.");
+  process.stdout.write("Server is offline.");
 });
 
 socket.on('end', function(data) {
-  process.stdin.write("Disconnected from server.");
+  process.stdout.write("Disconnected from server.");
   process.exit();
 });
 
