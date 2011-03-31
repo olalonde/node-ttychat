@@ -38,7 +38,7 @@ var server = net.createServer(function (socket) {
   clients.push(client);
   
   socket.setTimeout(0);
-  socket.write("Welcome on HN's unofficial chat server!\nEnter your username:\n");
+  socket.write("Welcome node-ttychat!\nEnter your username:\n");
   socket.on('data', function(data) {
     if(client.name == null) {
       var name = data.toString().match(/\w+/).toString();
@@ -49,11 +49,19 @@ var server = net.createServer(function (socket) {
         client.name = name;
         util.log(client.name + " connected.");
         broadcast(client.name + " connected.\n", client);
+        socket.write("You can now start chatting. Type !users for the list of connected users.\n");
       }
       return;
     }
-    var message = '<' + client.name + '> ' + data;
-    broadcast(message);
+    if (data.toString().match(/^!users/) == "!users") {
+      clients.forEach(function(c) {
+        if(c.name != null) socket.write(c.name + '\n');
+      });
+    }
+    else {
+      var message = '<' + client.name + '> ' + data;
+      broadcast(message);
+    }
   });
   socket.on('end', function() {
     clients.remove(client);
